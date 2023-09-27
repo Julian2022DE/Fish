@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Timer_Game : MonoBehaviour
 {
     private float tiempoTranscurrido = 0.0f;
-    public TextMeshProUGUI textoTiempo; // Usa TextMeshProUGUI en lugar de Text
+    public TextMeshProUGUI textoTiempo;
 
     private void Update()
     {

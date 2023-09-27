@@ -8,6 +8,8 @@ public class PezIA : MonoBehaviour
     [SerializeField] private float speed = 1.5f;
     [SerializeField] private Transform pezSpriteIA;
     private int dir = 1;
+    [SerializeField] public float tamano;
+
 
     Vector2 limitesPantalla;
 
@@ -25,11 +27,11 @@ public class PezIA : MonoBehaviour
         else 
         {
             dir = -1;
-            pezSpriteIA.rotation = Quaternion.Euler(new Vector3(0, 100, 0));
+            pezSpriteIA.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
 
         float size = Random.Range(0.5f, 3f);
-
+        tamano = size;
         transform.localScale = new Vector3(size, size, size);
     }
 
@@ -38,9 +40,15 @@ public class PezIA : MonoBehaviour
     {
         transform.position = transform.position + (Vector3.right * dir * Time.deltaTime * speed);
 
+        Vector2 limitesPantalla = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
         if (transform.position.x <= - limitesPantalla.x -2 || transform.position.x > limitesPantalla.x + 2)
         {
             Destroy(gameObject);
         }
+    }
+    public float GetTamano()
+    {
+        return tamano;
     }
 }

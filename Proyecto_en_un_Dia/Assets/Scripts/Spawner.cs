@@ -6,23 +6,27 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField]private float spawnTime;
 
-    [SerializeField]private GameObject pezPrefab;
+    [SerializeField]public GameObject [] pezPrefabs;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        spawnTime = spawnTime - Time.deltaTime;
+        spawnTime -= Time.deltaTime;
 
         if (spawnTime <= 0)
         {
-            Instantiate(pezPrefab, GetSpawnposition(), Quaternion.identity);
-            spawnTime = 1.5f;
+            // Elije un índice aleatorio del array pezPrefabs
+            int indiceAleatorio = Random.Range(0, pezPrefabs.Length);
+
+            // Instancia el prefab seleccionado en la posición aleatoria
+            Instantiate(pezPrefabs[indiceAleatorio], GetSpawnposition(), Quaternion.identity);
+
+            Debug.Log("aparece");
+            spawnTime = 2f;
         }
     }
 
@@ -33,6 +37,7 @@ public class Spawner : MonoBehaviour
         float aleatorioVertical = Random.Range(-limitesPantalla.y, limitesPantalla.y);
         float aleatorioHorizontal = Random.Range(0, 2) == 0 ? -limitesPantalla.x -1 : limitesPantalla.x + 1;
 
+    
         return new Vector3(aleatorioHorizontal, aleatorioVertical, 0);
     }
 }
